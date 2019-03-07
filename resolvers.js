@@ -1,7 +1,7 @@
 const { AuthenticationError } = require('apollo-server');
 
 const user = {
-  _id: "1",
+  _id: "12122222221",
   name: "Andriy",
   email: "xai1983kbu@gmail.com",
   picture: "https://cloudinary.com/abcd"
@@ -16,6 +16,7 @@ const authenticated = next => (root, args, ctx, info) => {
 
 module.exports = {
   Query: {
+    // me: () => user
     me: authenticated((root, args, ctx) => ctx.currentUser)
   }
 };
