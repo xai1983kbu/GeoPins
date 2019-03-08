@@ -4,14 +4,19 @@ const Pin = require('./models/Pin');
 
 const authenticated = next => (root, args, ctx, info) => {
   if (!ctx.currentUser) {
-    throw new AuthenticationError("You must be logged in")
+    throw new AuthenticationError("You must be logged in -- take a look at resolvers.js :)")
   }
   return next(root, args, ctx, info)
 };
 
 module.exports = {
   Query: {
-    me: authenticated((root, args, ctx) => ctx.currentUser)
+    me: authenticated((root, args, ctx) => ctx.currentUser),
+    getPins: async (root, args, ctx) => {
+      const pins = await Pin.find({}).populate('author').populate('comments.author');
+      return pins;
+    },
+    test: () => "123"
   },
   Mutation: {
     createPin: authenticated(async (root, args, ctx) => {

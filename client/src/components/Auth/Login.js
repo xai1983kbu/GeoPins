@@ -14,13 +14,13 @@ const Login = ({ classes }) => {
   const onSuccess = async googleUser => {
     try {
       const idToken = googleUser.getAuthResponse().id_token;
-      // console.log(idToken);
+      console.log(idToken);
       const client = new GraphQLClient(BASE_URL, {
         headers: { authorization: idToken }
       });
       const { me } = await client.request(ME_QUERY);
-      // console.log(me);
-      // console.log(googleUser.isSignedIn());
+      console.log(me);
+      console.log(googleUser.isSignedIn());
       dispatch({ type: "LOGIN_USER", payload: me });
       dispatch({ type: "IS_LOGGED_IN", payload: googleUser.isSignedIn() });
     } catch (err) {
@@ -47,7 +47,7 @@ const Login = ({ classes }) => {
         clientId="272781104722-9a3kda10svet1a9i2lbc14plicvd3gf2.apps.googleusercontent.com"
         onSuccess={onSuccess}
         onFailure={onFailure}
-        isSignedIn={true}
+        // isSignedIn={true}
         buttonText="Login with Google"
         theme="dark"
       />
