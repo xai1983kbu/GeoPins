@@ -20,6 +20,9 @@ export const CREATE_PIN_MUTATION = `
         email
         picture
       }
+      comments {
+        text
+      }
     }
   }
 `;
